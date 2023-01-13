@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
 
-// #define SIZE 10
-
 template <typename T> 
 class Stack {
 
@@ -10,14 +8,12 @@ class Stack {
 
     int top;
     std::vector<T>* items;
-    // T items[SIZE];
 
     public: 
     
     Stack(int size) {
         this->top = -1;
         this->items = new std::vector<T>(size);
-        // this->items = type [size];
     }
 
     bool isEmpty() {
