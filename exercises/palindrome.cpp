@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
-#include "../structures/stack/stack.cpp"
 #include "../structures/stack/stack.h"
-#include "../structures/queue/queue.cpp"
 #include "../structures/queue/queue.h"
 
 bool isPalindrome(int input){
