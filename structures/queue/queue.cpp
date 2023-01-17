@@ -1,13 +1,4 @@
-#include <iostream>
-
-template <typename T>
-struct Queue {
-    
-    int size;
-    T head;
-    T tail; 
-    T* items;
-};
+#include "queue.h"
 
 template <typename T>
 struct Queue<T>* createQueue(int size) {
@@ -49,29 +40,32 @@ void enqueue(Queue<T>* queue, T value) {
     
     queue->tail++;
     queue->items[queue->tail] = value;
-    // *(queue->items + queue->tail) = value;
 }
 
 template <typename T>
-void dequeue(Queue<T>* queue) {
+T dequeue(Queue<T>* queue) {
 
     if (isEmpty(queue)){
         std::cout << "queue is empty.." << std::endl;
-        return;
+        return NULL;
     }
 
     if (queue->head == queue->tail){
+        T dequeued = queue->items[queue->head];
         queue->head = queue->tail = -1;
-        return;
+        return dequeued;
     }
 
-    for (int i = 0; i < queue->tail; i++){
+    T dequeued = queue->items[queue->head]; 
+
+    for (int i=0; i < queue->tail; i++){
         queue->items[i] = queue->items[i+1];
     }
 
     queue->items[queue->tail] = NULL;
     queue->tail--;
-    // queue->head++;
+    
+    return dequeued;
 }
 
 template <typename T>
@@ -79,17 +73,19 @@ void display(Queue<T>* queue) {
 
     if (isEmpty(queue)){
         std::cout << "queue is empty.." << std::endl;
+        std::cout << "\n";
         return;
     }
 
-    for (int i = 0; i < queue->tail+1; i++) {
+    for (int i=0; i < queue->tail+1; i++) {
         if (i != queue->tail){
             std::cout << queue->items[i] << " <- ";
         } else {
             std::cout << queue->items[i] << std::endl;
         }
     }
-    std::cout << std::endl;
+
+    std::cout << "\n";
 }
 
 template <typename T>
@@ -112,40 +108,41 @@ T tail(Queue<T>* queue) {
     return queue->items[queue->tail];
 }
 
-int main() {
+// int main() {
 
-    struct Queue<int>* queue = createQueue<int>(3);
+//     struct Queue<int>* queue = createQueue<int>(3);
 
-    std::cout << "* dequeue ~ empty case: " << std::endl;
-    dequeue(queue);
+//     std::cout << "* dequeue ~ empty case: " << std::endl;
+//     dequeue(queue);
+//     std::cout << "\n";
 
-    std::cout << "* enqueue ~ empty case" << std::endl;
-    enqueue(queue, 3);
-    display(queue);
+//     std::cout << "* enqueue ~ empty case" << std::endl;
+//     enqueue(queue, 3);
+//     display(queue);
 
-    std::cout << "* dequeue ~ single case: " << std::endl;
-    dequeue(queue);
-    display(queue);
+//     std::cout << "* dequeue ~ single case: " << std::endl;
+//     dequeue(queue);
+//     display(queue);
 
-    std::cout << "* head ~ empty case: " << head(queue) << std::endl;
-    display(queue);
+//     std::cout << "* head ~ empty case: " << head(queue) << std::endl;
+//     display(queue);
 
-    enqueue(queue, 4); 
-    std::cout << "* head ~ single case: " << head(queue) << std::endl;
-    display(queue);
+//     enqueue(queue, 4); 
+//     std::cout << "* head ~ single case: " << head(queue) << std::endl;
+//     display(queue);
 
-    enqueue(queue, 5); 
-    enqueue(queue, 6);
-    std::cout << "* head ~ multiple case: " << head(queue) << std::endl;
-    display(queue);
+//     enqueue(queue, 5); 
+//     enqueue(queue, 6);
+//     std::cout << "* head ~ multiple case: " << head(queue) << std::endl;
+//     display(queue);
 
-    enqueue(queue, 7);
-    std::cout << "* head ~ full case: " << head(queue) << std::endl;
-    display(queue);
+//     enqueue(queue, 7);
+//     std::cout << "* head ~ full case: " << head(queue) << std::endl;
+//     display(queue);
 
-    std::cout << "* dequeue ~ multiple case: " << std::endl;
-    dequeue(queue);
-    display(queue);
+//     std::cout << "* dequeue ~ multiple case: " << std::endl;
+//     dequeue(queue);
+//     display(queue);
 
-    return 0;
-}
+//     return 0;
+// }

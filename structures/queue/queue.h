@@ -1,4 +1,5 @@
-#pragma once 
+#pragma once
+#include <iostream>
 
 template <typename T>
 struct Queue {
@@ -22,7 +23,7 @@ template <typename T>
 void enqueue(Queue<T>* queue, T value);
 
 template <typename T>
-void dequeue(Queue<T>* queue);
+T dequeue(Queue<T>* queue);
 
 template <typename T>
 void display(Queue<T>* queue);
